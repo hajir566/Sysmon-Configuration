@@ -1,0 +1,67 @@
+
+<!--   NOTICE: This configuration is adapted from Sysmon-Modular and the TrustedSec Sysmon configuration.                     -->
+<!--          It is a balanced, medium-verbosity build intended for defensive monitoring and threat hunting.                  -->
+<!--          Because it is balanced, there may be blind spots—tune to your environment and risk model.                       -->
+<!--          References: Sysmon-Modular (https://github.com/olafhartong/sysmon-modular)                                      -->
+<!--                      trustedsec  (https://github.com/trustedsec/SysmonCommunityGuide/)                                   -->
+<!--                                                                                                                          -->
+<!--         ____________________________________________________________                                                     -->
+<!--        |   _   _    _       _   ___   ____                          |                                                    -->
+<!--        |  | | | |  / \     | | |_ _| |  _ \                         |                                                    -->
+<!--        |  | |_| | / _ \ _  | |  | |  | |_) |                        |                                                    -->
+<!--        |  |  _  |/ ___ \ |_| |  | |  |  _ <                         |                                                    -->
+<!--        |  |_| |_/_/   \_\___/  |___| |_| \_\                        |                                                    -->
+<!--        |____________________________________________________________|                                                    -->
+
+
+
+<Sysmon schemaversion="4.90">
+  <HashAlgorithms>*</HashAlgorithms>
+  <!-- This now also determines the file names of the files preserved (String) -->
+  <CheckRevocation>False</CheckRevocation>
+  <!-- Setting this to true might impact performance -->
+  <DnsLookup>False</DnsLookup>
+  <!-- Disables lookup behavior, default is True (Boolean) -->
+  <ArchiveDirectory>Sysmon</ArchiveDirectory>
+  <!-- Sets the name of the directory in the C:\ root where preserved files will be saved (String)-->
+  <EventFiltering>
+
+
+
+
+
+
+
+    <!-- EventCode 11 FileCreate Include Events-->
+    <RuleGroup groupRelation="or">
+        <FileCreate onmatch="include">
+
+
+
+
+
+        </FileCreate>
+    </RuleGroup>
+
+    <!-- EventCode 11 FileCreate Exclude Events--> 
+    <RuleGroup groupRelation="or">
+        <FileCreate onmatch="exclude">
+
+
+
+
+        </FileCreate>
+    </RuleGroup>
+    
+
+
+
+
+
+
+
+
+
+
+  </EventFiltering>
+</Sysmon>
