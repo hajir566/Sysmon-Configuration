@@ -1,17 +1,17 @@
 
-<!--   NOTICE: This configuration is adapted from Sysmon-Modular and the TrustedSec Sysmon configuration.                     -->
-<!--          It is a balanced, medium-verbosity build intended for defensive monitoring and threat hunting.                  -->
-<!--          Because it is balanced, there may be blind spots—tune to your environment and risk model.                       -->
-<!--          References: Sysmon-Modular (https://github.com/olafhartong/sysmon-modular)                                      -->
-<!--                      trustedsec  (https://github.com/trustedsec/SysmonCommunityGuide/)                                   -->
-<!--                                                                                                                          -->
-<!--         ____________________________________________________________                                                     -->
-<!--        |   _   _    _       _   ___   ____                          |                                                    -->
-<!--        |  | | | |  / \     | | |_ _| |  _ \                         |                                                    -->
-<!--        |  | |_| | / _ \ _  | |  | |  | |_) |                        |                                                    -->
-<!--        |  |  _  |/ ___ \ |_| |  | |  |  _ <                         |                                                    -->
-<!--        |  |_| |_/_/   \_\___/  |___| |_| \_\                        |                                                    -->
-<!--        |____________________________________________________________|                                                    -->
+<!--   NOTICE: This configuration is adapted from Sysmon-Modular and the TrustedSec Sysmon configuration.                 -->
+<!--        It is a balanced, medium-verbosity build intended for defensive monitoring and threat hunting.                -->
+<!--        Because it is balanced, there may be blind spots—tune to your environment and risk model.                   -->
+<!--        References: Sysmon-Modular (https://github.com/olafhartong/sysmon-modular)                                -->
+<!--                  trustedsec  (https://github.com/trustedsec/SysmonCommunityGuide/)                             -->
+<!--                                                                                                  -->
+<!--         ____________________________________________________________                                           -->
+<!--        |   _   _    _       _   ___   ____                      |                                          -->
+<!--        |  | | | |  / \     | | |_ _| |  _ \                     |                                          -->
+<!--        |  | |_| | / _ \ _  | |  | |  | |_) |                    |                                          -->
+<!--        |  |  _  |/ ___ \ |_| |  | |  |  _ <                     |                                          -->
+<!--        |  |_| |_/_/   \_\___/  |___| |_| \_\                    |                                          -->
+<!--        |____________________________________________________________|                                          -->
 
 
 
@@ -34,34 +34,557 @@
 
     <!-- EventCode 11 FileCreate Include Events-->
     <RuleGroup groupRelation="or">
-        <FileCreate onmatch="include">
+      <FileCreate onmatch="include">
+
+
+        <TargetFilename name="technique_id=T1546.011,technique_name=Application Shimming" condition="contains">C:\Windows\AppPatch\Custom</TargetFilename>
+        <TargetFilename name="technique_id=T1059,technique_name=Command and Scripting Interpreter" condition="end with">.chm</TargetFilename>
+
+        <!--  Event ID 11: User-writable staging (C:\Users\...\*)     -->
+        <Rule name="FC_USER_DLL" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users</TargetFilename>
+          <TargetFilename condition="end with">.dll</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_BAT" groupRelation="and">
+          <TargetFilename condition="end with">.bat</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_CMD" groupRelation="and">
+          <TargetFilename condition="end with">.cmd</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_ONE" groupRelation="and">
+          <TargetFilename condition="end with">.one</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_EXE" groupRelation="and">
+          <TargetFilename condition="end with">.exe</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_ISO" groupRelation="and">
+          <TargetFilename condition="end with">.iso</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_IMG" groupRelation="and">
+          <TargetFilename condition="end with">.img</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_KIRBI" groupRelation="and">
+          <TargetFilename condition="end with">.kirbi</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_DOCM" groupRelation="and">
+          <TargetFilename condition="end with">.docm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PPTM" groupRelation="and">
+          <TargetFilename condition="end with">.pptm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_XLSM" groupRelation="and">
+          <TargetFilename condition="end with">.xlsm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_XLM" groupRelation="and">
+          <TargetFilename condition="end with">.xlm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_DOTM" groupRelation="and">
+          <TargetFilename condition="end with">.dotm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_XLTM" groupRelation="and">
+          <TargetFilename condition="end with">.xltm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_POTM" groupRelation="and">
+          <TargetFilename condition="end with">.potm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PPSM" groupRelation="and">
+          <TargetFilename condition="end with">.ppsm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_SLDM" groupRelation="and">
+          <TargetFilename condition="end with">.sldm</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_XLAM" groupRelation="and">
+          <TargetFilename condition="end with">.xlam</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_XLA" groupRelation="and">
+          <TargetFilename condition="end with">.xla</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_IQY" groupRelation="and">
+          <TargetFilename condition="end with">.iqy</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_SLK" groupRelation="and">
+          <TargetFilename condition="end with">.slk</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_JSP" groupRelation="and">
+          <TargetFilename condition="end with">.jsp</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_JSPX" groupRelation="and">
+          <TargetFilename condition="end with">.jspx</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_ASP" groupRelation="and">
+          <TargetFilename condition="end with">.asp</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_ASPX" groupRelation="and">
+          <TargetFilename condition="end with">.aspx</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PHP" groupRelation="and">
+          <TargetFilename condition="end with">.php</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_WAR" groupRelation="and">
+          <TargetFilename condition="end with">.war</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_ACE" groupRelation="and">
+          <TargetFilename condition="end with">.ace</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PY" groupRelation="and">
+          <TargetFilename condition="end with">.py</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PYC" groupRelation="and">
+          <TargetFilename condition="end with">.pyc</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PYW" groupRelation="and">
+          <TargetFilename condition="end with">.pyw</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_RDP" groupRelation="and">
+          <TargetFilename condition="end with">.rdp</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_RWZ" groupRelation="and">
+          <TargetFilename condition="end with">.rwz</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_SYS" groupRelation="and">
+          <TargetFilename condition="end with">.sys</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_URL" groupRelation="and">
+          <TargetFilename condition="end with">.url</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_VB" groupRelation="and">
+          <TargetFilename condition="end with">.vb</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_VBE" groupRelation="and">
+          <TargetFilename condition="end with">.vbe</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_VBS" groupRelation="and">
+          <TargetFilename condition="end with">.vbs</TargetFilename>
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PS1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+          <TargetFilename condition="end with">.ps1</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PSM1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+          <TargetFilename condition="end with">.psm1</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PSD1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+          <TargetFilename condition="end with">.psd1</TargetFilename>
+        </Rule>
+        <Rule name="FC_USER_PSC1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\</TargetFilename>
+          <TargetFilename condition="end with">.psc1</TargetFilename>
+        </Rule>
+
+        <!--  Can be devided to User Temp and Windows Temp Directories  -->
+        <Rule name="FC_TEMP_EXE" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="end with">.exe</TargetFilename>
+        </Rule>
+        <Rule name="FC_TEMP_PS" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="end with">.ps1</TargetFilename>
+        </Rule>
+        <Rule name="FC_TEMP_BIN" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="end with">.bin</TargetFilename>
+        </Rule>
+        <Rule name="FC_TEMP_DLL" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="end with">.dll</TargetFilename>
+        </Rule>
+        <Rule name="FC_TEMP_BAT" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="end with">.bat</TargetFilename>
+        </Rule>
+        <Rule name="FC_TEMP_ARCHIVE" groupRelation="and">
+          <TargetFilename condition="contains">\Temp\</TargetFilename>
+          <TargetFilename condition="Contains any">.zip;.rar;.7z</TargetFilename>
+        </Rule>
+
+        <!--  Event ID 11: High-risk staging in C:\Users\Public\      -->
+        <!--  Executables / binaries  -->
+        <Rule name="FC_PUBLIC_EXE" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.exe</TargetFilename>
+        </Rule>
+
+        <Rule name="FC_PUBLIC_BIN" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.bin</TargetFilename>
+        </Rule>
+
+        <Rule name="FC_PUBLIC_DLL" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.dll</TargetFilename>
+        </Rule>
+
+        <!--  PowerShell (full coverage)  -->
+        <Rule name="FC_PUBLIC_PS1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.ps1</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_PSM1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.psm1</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_PSD1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.psd1</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_PSC1" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.psc1</TargetFilename>
+        </Rule>
+
+        <!--  VBScript / Visual Basic  -->
+        <Rule name="FC_PUBLIC_VBS" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.vbs</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_VB" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.vb</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_VBE" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.vbe</TargetFilename>
+        </Rule>
+        <!--  Batch / CMD  -->
+        <Rule name="FC_PUBLIC_BAT" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.bat</TargetFilename>
+        </Rule>
+        <Rule name="FC_PUBLIC_CMD" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.cmd</TargetFilename>
+        </Rule>
+
+        <Rule name="FC_PUBLIC_HTA" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.hta</TargetFilename>
+        </Rule>
+
+        <Rule name="FC_PUBLIC_REG" groupRelation="and">
+          <TargetFilename condition="begin with">C:\Users\Public\</TargetFilename>
+          <TargetFilename condition="end with">.reg</TargetFilename>
+        </Rule>
+
+
+        <Rule name="FC_WINWORD" groupRelation="and">
+          <Image condition="end with">\WINWORD.EXE</Image>
+          <TargetFilename condition="contains any">.cab;.inf</TargetFilename>
+        </Rule>
+
+
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="contains">AppData\Local\Microsoft\CLR_v2.0\UsageLogs\</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\cscript.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\wscript.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\wmic.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\mshta.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\svchost.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\regsvr32.exe.log</TargetFilename>
+        <TargetFilename name="technique_id=T1218,technique_name=Office Signed Binary Proxy Execution" condition="end with">\UsageLogs\rundll32.exe.log</TargetFilename>
+        
+        <!--  Driver files Created -->        
+        <TargetFilename name="FC-Drivers32" condition="begin with">C:\Windows\System32\Drivers</TargetFilename>
+        <TargetFilename name="FC-Drivers64" condition="begin with">C:\Windows\SysWOW64\Drivers</TargetFilename>
+
+        <Rule groupRelation="and">
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="begin with">C:\Windows\System32\CodeIntegrity\CIPolicies\Active\</TargetFilename>
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="end with">.cip</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="begin with">C:\Windows\System32\CodeIntegrity\</TargetFilename>
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="end with">.p7b</TargetFilename>
+        </Rule>
+          <TargetFilename name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\Windows\System32\Wbem</TargetFilename>
+          <TargetFilename name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\Windows\SysWOW64\Wbem</TargetFilename>
+        <Image name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\WINDOWS\system32\wbem\scrcons.exe</Image>
+
+
+        <!--  Cred Dumping  -->
+        <Rule name="technique_id=T1003.001,technique_name=OS Credential Dumping: LSASS Memory" groupRelation="and">
+          <TargetFilename condition="contains">lsass</TargetFilename>
+          <TargetFilename condition="contains any">dmp;DMP;mdpm</TargetFilename>
+          <Image condition="image">taskmgr.exe</Image>
+        </Rule>
+        
+        <Rule groupRelation="and">
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="begin with">C:\Windows\System32\CodeIntegrity\CIPolicies\Active\</TargetFilename>
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="end with">.cip</TargetFilename>
+        </Rule>
+        
+        <Rule groupRelation="and">
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="begin with">C:\Windows\System32\CodeIntegrity\</TargetFilename>
+          <TargetFilename name="technique_id=T1562.001,technique_name=Disable or Modify tools" condition="end with">.p7b</TargetFilename>
+        </Rule>
+
+        <TargetFilename name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\Windows\System32\Wbem</TargetFilename>
+        <TargetFilename name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\Windows\SysWOW64\Wbem</TargetFilename>
+        <Image name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="begin with">C:\WINDOWS\system32\wbem\scrcons.exe</Image>
+
+        <TargetFilename name="technique_id=T1047,technique_name=File System Permissions Weakness" condition="begin with">C:\Users\Default\</TargetFilename>
+        <TargetFilename name="technique_id=T1574.010,technique_name=Services File Permissions Weakness" condition="begin with">C:\Windows\</TargetFilename>
+        <TargetFilename name="technique_id=T1546.008,technique_name=Services File Permissions Weakness" condition="begin with">C:\Program Files\</TargetFilename>
+
+        <TargetFilename name="FC_UNDER_TASKS32" condition="begin with">C:\Windows\System32\Tasks</TargetFilename>
+        <TargetFilename name="FC_UNDER_TASKS" condition="begin with">C:\Windows\Tasks\</TargetFilename>
+        <TargetFilename name="FC_UNDER_STARTMENU" condition="contains">\Start Menu</TargetFilename>
+        <TargetFilename name="FC_UNDER_STARTUP" condition="contains">\Startup</TargetFilename>
+        <TargetFilename name="FC_GPO_MACHINE_SCRIPTS" condition="begin with">C:\Windows\System32\GroupPolicy\Machine\Scripts</TargetFilename>
+        <TargetFilename name="FC_GPO_USER_SCRIPTS" condition="begin with">C:\Windows\System32\GroupPolicy\User\Scripts</TargetFilename>
+        <TargetFilename name="FC_SCRIPT_HTA" condition="end with">.hta</TargetFilename>
+
+        <TargetFilename name="FC_SCRIPT_JS" condition="end with">.js</TargetFilename>
+        <TargetFilename name="FC_SCRIPT_JS" condition="end with">.javascript</TargetFilename>
+
+        <TargetFilename name="FC_FORCED_AUTH_LURE" condition="end with">.lnk</TargetFilename>
+        <TargetFilename name="FC_FORCED_AUTH_LURE" condition="end with">.scf</TargetFilename>
+
+        <TargetFilename name="FC_CLICKONCE_ARTIFACT" condition="end with">.application</TargetFilename>
+        <TargetFilename name="FC_CLICKONCE_ARTIFACT" condition="end with">.appref-ms</TargetFilename>
+        <TargetFilename name="FC_CLICKONCE_ARTIFACT" condition="end with">.settingcontent-ms</TargetFilename>
+
+        <TargetFilename name="FC_DEVPROJECT_ARTIFACT" condition="end with">.*proj</TargetFilename>
+        <TargetFilename name="FC_DEVPROJECT_ARTIFACT" condition="end with">.sln</TargetFilename>
+
+        <TargetFilename name="FC_OUTLOOK_TEMP_ATTACHMENT" condition="contains">\Content.Outlook\</TargetFilename>
+        <TargetFilename name="FC_OUTLOOK_VBA_PROJECT" condition="contains">Roaming\Microsoft\Outlook\VbaProject.OTM</TargetFilename>
+        <TargetFilename name="FC_OUTLOOK_CONFIG" condition="contains">Roaming\Microsoft\Outlook\Outlook.xml</TargetFilename>
+
+        <TargetFilename name="FC_POWERSHELL_ENGINE_PATH_WRITE" condition="begin with">C:\Windows\System32\WindowsPowerShell</TargetFilename>
+        <TargetFilename name="FC_POWERSHELL_ENGINE_PATH_WRITE" condition="begin with">C:\Windows\SysWOW64\WindowsPowerShell</TargetFilename>
 
 
 
 
 
-        </FileCreate>
+      </FileCreate>
+
     </RuleGroup>
+
 
     <!-- EventCode 11 FileCreate Exclude Events--> 
     <RuleGroup groupRelation="or">
-        <FileCreate onmatch="exclude">
+      <FileCreate onmatch="exclude">
+        <Image condition="is">C:\Program Files (x86)\Dell\CommandUpdate\InvColPC.exe</Image>
+        <Image condition="is">c:\windows\system32\provtool.exe</Image>
+        <Image condition="is">C:\Windows\system32\igfxCUIService.exe</Image>
+        <Image condition="is">C:\Program Files (x86)\Ivanti\Workspace Control\pfwsmgr.exe</Image>
+        <Image condition="is">C:\Program Files (x86)\RES Software\Workspace Manager\pfwsmgr.exe</Image>
+        <Image condition="is">C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe</Image>
+        <TargetFilename condition="contains all">C:\Windows\Prefetch;.pf</TargetFilename>
+        <Image condition="is">C:\Windows\System32\smss.exe</Image>
+        <Image condition="is">C:\Windows\system32\CompatTelRunner.exe</Image>
+        <Image condition="is">C:\Windows\system32\wbem\WMIADAP.EXE</Image>
+        <TargetFilename condition="begin with">C:\Windows\System32\DriverStore\Temp\</TargetFilename>
+        <TargetFilename condition="begin with">C:\Windows\System32\wbem\Performance\</TargetFilename>
+        <TargetFilename condition="end with">WRITABLE.TST</TargetFilename>
+        <TargetFilename condition="contains">\AppData\Roaming\Microsoft\Windows\Recent\</TargetFilename>
+        <TargetFilename condition="begin with">C:\$WINDOWS.~BT\Sources\SafeOS\SafeOS.Mount\</TargetFilename>
+        <Image condition="begin with">C:\WINDOWS\winsxs\amd64_microsoft-windows</Image>
+        <Image condition="is">c:\Program Files\Microsoft Security Client\MsMpEng.exe</Image>
+        <Rule groupRelation="and">
+          <Image condition="image">Outlook.exe</Image>
+          <TargetFilename condition="contains">Roaming\Microsoft\Outlook\Outlook.xml</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Windows\system32\wsmprovhost.exe</Image>
+          <TargetFilename condition="contains all">C:\Users\;\AppData\Local\Temp;__PSScriptPolicyTest;.ps1</TargetFilename>
+        </Rule>
+        <!-- Exclude policy test by NT Authority-->
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Windows\system32\WindowsPowerShell\v1.0\powershell.exe</Image>
+          <TargetFilename condition="contains all">C:\Windows\Temp;__PSScriptPolicyTest;.ps1</TargetFilename>
+          <User condition="is">NT-AUTORITÄT\SYSTEM</User>
+        </Rule>
+        <Image condition="is">C:\WINDOWS\CCM\CcmExec.exe</Image>
+        <TargetFilename condition="begin with">C:\Windows\CCM</TargetFilename>
+        <TargetFilename condition="begin with">C:\Windows\System32\Tasks\Microsoft\Windows\PLA\FabricTraces</TargetFilename>
+        <TargetFilename condition="begin with">C:\Windows\System32\Tasks\Microsoft\Windows\SoftwareProtectionPlatform\SvcRestartTask</TargetFilename>
+        <TargetFilename condition="begin with">C:\Windows\System32\Tasks\Microsoft\Windows\Customer Experience Improvement Program\Server\ServerRoleUsageCollector</TargetFilename>
+        <TargetFilename condition="begin with">C:\Windows\System32\Tasks\Microsoft\Windows\Customer Experience Improvement Program\Server\ServerCeipAssistant</TargetFilename>
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Windows\System32\svchost.exe</Image>
+          <TargetFilename condition="is">C:\Windows\ServiceProfiles\LocalService\AppData\Local\lastalive0.dat</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Windows\System32\svchost.exe</Image>
+          <TargetFilename condition="is">C:\Windows\ServiceProfiles\LocalService\AppData\Local\lastalive1.dat</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files (x86)\baramundi\BMA\BDSRun.exe</Image>
+          <TargetFilename condition="begin with">C:\ProgramData\baramundi\Temp\</TargetFilename>
+        </Rule>
+        <!-- Exclude google play-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files\Google\Play Games\current\service\Service.exe</Image>
+          <TargetFilename condition="contains all">C:\Users\;AppData\Local\Google\Play Games\</TargetFilename>
+        </Rule>
+        <!-- Exclude Firefox prefs-1.js creation under profile directory-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files\Mozilla Firefox\firefox.exe</Image>
+          <TargetFilename condition="end with">.js</TargetFilename>
+        </Rule>
+        <!-- Exclude outlook json file creation under :\\Users\\ali.hajir\\AppData\\Local\\Microsoft\\Outlook\\16\\-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files\Microsoft Office\root\Office16\OUTLOOK.EXE</Image>
+          <TargetFilename condition="end with">.json</TargetFilename>
+        </Rule>
+        <!-- Exclude widgets.exe-->        
+        <Rule groupRelation="and">
+          <Image condition="end with">Widgets.exe</Image>
+        </Rule>
+        <!-- Exclude Trillex Deployment-->        
+        <Rule groupRelation="and">
+          <Image condition="contains">FramePkg.exe</Image>
+          <TargetFilename condition="contains">C:\Windows\Temp\</TargetFilename>
+        </Rule>
+        <!-- Exclude ms-teams.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="end with">ms-teams.exe</Image>
+          <TargetFilename condition="contains all">C:\Users\;AppData\Local\Packages\</TargetFilename>
+        </Rule>
+        <!-- Exclude notion.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="end with">Notion.exe</Image>
+          <TargetFilename condition="contains all">C:\Users\;AppData\Roaming\Notion\</TargetFilename>
+        </Rule>
+        <!-- Exclude code.exe noise ;tmp;Tmp;json;vscdb-journal;xml-->        
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="end with">vsctmp</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="end with">json</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="end with">vscdb-journal</TargetFilename>
+        </Rule>        
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="end with">xml</TargetFilename>
+        </Rule>  
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="end with">tmp</TargetFilename>
+        </Rule>  
+        <Rule groupRelation="and">
+          <Image condition="end with">Code.exe</Image>
+          <TargetFilename condition="contains all">C:\Users\;AppData\Roaming\Code\Backups</TargetFilename>
+        </Rule>
+        <!-- Exclude msedgewebview2.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="end with">msedgewebview2.exe</Image>
+          <TargetFilename condition="contains all">log;ldb;</TargetFilename>
+        </Rule>
+        <Rule groupRelation="and">
+          <Image condition="end with">msedgewebview2.exe</Image>
+          <TargetFilename condition="contains">\Cache\Cache_Data\</TargetFilename>
+        </Rule>
+        <!-- Exclude zoom.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="contains">AppData\Roaming\Zoom\bin\Zoom.exe</Image>
+          <TargetFilename condition="contains all">tmp</TargetFilename>
+        </Rule>
 
+        <!-- Exclude wazuh.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Program Files (x86)\ossec-agent\wazuh-agent.exe</Image>
+          <User condition="is">NT-AUTORITÄT\SYSTEM</User>
+        </Rule>
 
+        <!-- Exclude svchost.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\WINDOWS\system32\svchost.exe</Image>
+          <TargetFilename condition="begin with">C:\Windows\System32\GroupPolicy\</TargetFilename>
+        </Rule>
 
+        <!-- Exclude svchost.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\WINDOWS\system32\svchost.exe</Image>
+          <TargetFilename condition="begin with">C:\Windows\System32\sru\</TargetFilename>
+        </Rule>
 
-        </FileCreate>
+        <!-- Exclude svchost.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\WINDOWS\system32\svchost.exe</Image>
+          <TargetFilename condition="end with">tmp</TargetFilename>
+        </Rule>
+
+        <!-- Exclude svchost.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="begin with">C:\Windows\System32\SleepStudy\</Image>
+          <User condition="is">NT-AUTORITÄT\Lokaler Dienst</User>
+        </Rule>
+
+        <!-- Exclude Trillex.exe noise-->        
+        <Rule groupRelation="and">
+          <Image condition="begin with">C:\Program Files\McAfee\</Image>
+          <User condition="is">NT-AUTORITÄT\SYSTEM</User>
+        </Rule>
+
+        <!-- Exclude googleUpdate noise-->        
+        <Rule groupRelation="and">
+          <Image condition="Contains all">C:\Program Files (x86)\Google\GoogleUpdater\;updater.exe</Image>
+          <User condition="is">NT-AUTORITÄT\SYSTEM</User>
+        </Rule>
+
+        <!-- Exclude system log writing-->        
+        <Rule groupRelation="and">
+          <Image condition="is">System</Image>
+          <User condition="is">NT-AUTORITÄT\SYSTEM</User>
+        </Rule>
+        
+        <!-- Exclude system log writing-->        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\WINDOWS\system32\svchost.exe</Image>
+          <TargetFilename condition="contains any">.txt;.pri;.xml;.p7x;.winmd;.dat</TargetFilename>
+        </Rule>        
+        <Rule groupRelation="and">
+          <Image condition="is">C:\Windows\System32\WUDFHost.exe</Image>
+          <User condition="is">NT-AUTORITÄT\Lokaler Dienst</User>
+        </Rule>
+
+      </FileCreate>
     </RuleGroup>
     
-
-
-
-
-
-
-
-
-
-
   </EventFiltering>
 </Sysmon>
