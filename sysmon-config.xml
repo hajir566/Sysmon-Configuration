@@ -576,5 +576,155 @@
       </FileCreate>
     </RuleGroup>
 
+    <!-- Event ID 15 == FileStream Created - Includes -->
+    <RuleGroup name="FileStream-Created" groupRelation="or">
+      <FileCreateStreamHash onmatch="include">
+      <!-- Track downloads of executables and scripts -->
+      <!-- Archives / temp staging -->
+        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">.ps1</TargetFilename>
+        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">.ps2</TargetFilename>
+
+        <Rule name="MOTW_zip">
+          <TargetFilename condition="contains any">zip;rar;</TargetFilename>
+        </Rule>
+
+        <!-- Command / batch -->
+        <Rule name="MOTW_CMD">
+          <TargetFilename condition="end with">.cmd:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_BAT">
+          <TargetFilename condition="end with">.bat:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- Executables -->
+        <Rule name="MOTW_EXE">
+          <TargetFilename condition="end with">.exe:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_DLL">
+          <TargetFilename condition="end with">.dll:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- HTML applications -->
+        <Rule name="MOTW_HTA">
+          <TargetFilename condition="end with">.hta:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- Shortcuts -->
+        <Rule name="MOTW_LNK">
+          <TargetFilename condition="end with">.lnk:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- Registry -->
+        <Rule name="MOTW_REG">
+          <TargetFilename condition="end with">.reg:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- VBScript -->
+        <Rule name="MOTW_VBS">
+          <TargetFilename condition="end with">.vbs:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_VBE">
+          <TargetFilename condition="end with">.vbe:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_VB">
+          <TargetFilename condition="end with">.vb:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- JavaScript -->
+        <Rule name="MOTW_JS">
+          <TargetFilename condition="end with">.js:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- PDF (delivery, not execution) -->
+        <Rule name="MOTW_PDF">
+          <TargetFilename condition="end with">.pdf:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <!-- ========= Microsoft-specific execution formats ========= -->
+
+        <Rule name="MOTW_MSI">
+          <TargetFilename condition="end with">.msi:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_MSP">
+          <TargetFilename condition="end with">.msp:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_MSIX">
+          <TargetFilename condition="end with">.msix:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_MSIXBUNDLE">
+          <TargetFilename condition="end with">.msixbundle:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_MSC">
+          <TargetFilename condition="end with">.msc:Zone.Identifier</TargetFilename>
+        </Rule>
+        <!-- Browser-based downloads 
+
+        <Rule name="technique_id=T1189,technique_name=Drive-by Compromise" groupRelation="and">
+          <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
+          <Contents condition="contains any">blob:;about:internet</Contents>
+        </Rule>
+        <Rule name="Web-Downloads-gc" groupRelation="and">
+          <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
+          <Image condition="contains">chrome.exe</Image>
+        </Rule>
+        <Rule name="Web-Downloads-ms" groupRelation="and">
+          <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
+          <Image condition="contains">msedge.exe</Image>
+        </Rule>
+        <Rule name="Web-Downloads-ff" groupRelation="and">
+          <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
+          <Image condition="contains">firefox.exe</Image>
+        </Rule>
+        -->
+        <Rule name="technique_id=T1566.002,technique_name=Spearphishing Attachment" groupRelation="and">
+          <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
+          <Image condition="contains">OUTLOOK.EXE</Image>
+        </Rule>
+        <Rule name="MOTW_WORD_DOCM">
+          <TargetFilename condition="end with">.docm:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_WORD_DOTM">
+          <TargetFilename condition="end with">.dotm:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_EXCEL_XLSM">
+          <TargetFilename condition="end with">.xlsm:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_EXCEL_XLTM">
+          <TargetFilename condition="end with">.xltm:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_EXCEL_XLAM">
+          <TargetFilename condition="end with">.xlam:Zone.Identifier</TargetFilename>
+        </Rule>
+
+        <Rule name="MOTW_PPT_PPTM">
+          <TargetFilename condition="end with">.pptm:Zone.Identifier</TargetFilename>
+        </Rule>
+        <!-- ================= Legacy / Abuse-prone ================= -->
+        <Rule name="MOTW_RTF">
+          <TargetFilename condition="end with">.rtf:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_SLK">
+          <TargetFilename condition="end with">.slk:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_IQY">
+          <TargetFilename condition="end with">.iqy:Zone.Identifier</TargetFilename>
+        </Rule>
+        <Rule name="MOTW_ONENOTE">
+          <TargetFilename condition="end with">.one:Zone.Identifier</TargetFilename>
+        </Rule>
+
+      </FileCreateStreamHash>
+    </RuleGroup>
+
+
+
   </EventFiltering>
 </Sysmon>
