@@ -580,9 +580,8 @@
     <RuleGroup name="FileStream-Created" groupRelation="or">
       <FileCreateStreamHash onmatch="include">
       <!-- Track downloads of executables and scripts -->
-      <!-- Archives / temp staging -->
-        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">.ps1</TargetFilename>
-        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">.ps2</TargetFilename>
+        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="contains">.ps1</TargetFilename>
+        <TargetFilename name="technique_id=T1059.001,technique_name=PowerShell" condition="contains">.ps2</TargetFilename>
 
         <Rule name="MOTW_zip">
           <TargetFilename condition="contains any">zip;rar;</TargetFilename>
