@@ -687,23 +687,23 @@
           <TargetFilename condition="end with">:Zone.Identifier</TargetFilename>
           <Image condition="contains">OUTLOOK.EXE</Image>
         </Rule>
-        <Rule name="MOTW_WORD_DOCM">
+        <Rule name="MOTW_DOCM">
           <TargetFilename condition="end with">.docm:Zone.Identifier</TargetFilename>
         </Rule>
-        <Rule name="MOTW_WORD_DOTM">
+        <Rule name="MOTW_DOTM">
           <TargetFilename condition="end with">.dotm:Zone.Identifier</TargetFilename>
         </Rule>
-        <Rule name="MOTW_EXCEL_XLSM">
+        <Rule name="MOTW_XLSM">
           <TargetFilename condition="end with">.xlsm:Zone.Identifier</TargetFilename>
         </Rule>
-        <Rule name="MOTW_EXCEL_XLTM">
+        <Rule name="MOTW_XLTM">
           <TargetFilename condition="end with">.xltm:Zone.Identifier</TargetFilename>
         </Rule>
-        <Rule name="MOTW_EXCEL_XLAM">
+        <Rule name="MOTW_XLAM">
           <TargetFilename condition="end with">.xlam:Zone.Identifier</TargetFilename>
         </Rule>
 
-        <Rule name="MOTW_PPT_PPTM">
+        <Rule name="MOTW_PPTM">
           <TargetFilename condition="end with">.pptm:Zone.Identifier</TargetFilename>
         </Rule>
         <!-- ================= Legacy / Abuse-prone ================= -->
