@@ -606,6 +606,7 @@
         <CommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted -s WdiSystemHost</CommandLine>
         <CommandLine condition="is">C:\WINDOWS\System32\svchost.exe -k LocalSystemNetworkRestricted -p -s WdiSystemHost</CommandLine>
         <CommandLine condition="is">C:\Windows\system32\svchost.exe -k localSystemNetworkRestricted</CommandLine>
+        <CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p -s WFDSConMgrSvc</CommandLine>
         <CommandLine condition="is">C:\WINDOWS\system32\svchost.exe -k netsvcs -p -s wlidsvc</CommandLine>
         <CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -p -s ncaSvc</CommandLine>
         <CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s BDESVC</CommandLine>
@@ -685,10 +686,14 @@
         <CommandLine condition="begin with">C:\Program Files\Mozilla Firefox\firefox.exe</CommandLine>
         <Image condition="contains all">C:\Users\;\AppData\Local\Programs\Git\cmd\git.exe</Image>
 
+        <CommandLine condition="begin with">C:\Program Files\Git\cmd\git.exe</CommandLine>
+
+
+
       </ProcessCreate>
     </RuleGroup>
 
-        <!-- Event ID 7 == Image Loaded - Includes -->
+    <!-- Event ID 7 == Image Loaded - Includes -->
     <RuleGroup groupRelation="or">
       <ImageLoad onmatch="include">
         <Rule groupRelation="and">
